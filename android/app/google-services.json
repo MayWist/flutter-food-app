@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "608842914060",
+    "project_id": "flutterfoodapp-f0925",
+    "storage_bucket": "flutterfoodapp-f0925.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608842914060:android:d354b19e490a5f7ea95129",
+        "android_client_info": {
+          "package_name": "com.intern.baicfluttermap.flutterappfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608842914060-hapmeet1viltiu1o24i4pv5t4ac69119.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8GViMkE7OTzeTlWLZvAb8lfAl3lLXvuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608842914060-hapmeet1viltiu1o24i4pv5t4ac69119.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
