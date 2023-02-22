@@ -5,18 +5,44 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapViewModel extends ChangeNotifier {
+  int time = 0;
+
   String _currentLocationName = "...";
-  List _textlist = ["ตำแหน่งปัจจุบัน", "บ้าน", "ออฟฟิศ", "SDBStore"];
-  List _icondata = [null, Icons.home, Icons.abc, Icons.back_hand];
+  List _textlist = ["Current location", "บ้าน", "ออฟฟิศ", "SDBStore"];
+  List<IconData> _icondata = [
+    Icons.home,
+    Icons.home,
+    Icons.abc,
+    Icons.back_hand
+  ];
+  List<LatLng> latLanlist = [
+    LatLng(0, 0),
+    LatLng(13.7650836, 100.5379664),
+    LatLng(13.7650836, 100.5379664),
+    LatLng(13.7650836, 100.5379664)
+  ];
+  late int _selectedindex;
 
-  List get icondata => _icondata;
+  int get selectedindex => _selectedindex;
 
-  LatLng? _selectedLatLng;
+  set selectedindex(int value) {
+    _selectedindex = value;
+  }
+
+  late LatLng _selectedLatLng;
+
+  LatLng get selectedLatLng => _selectedLatLng;
+
+  set selectedLatLng(LatLng value) {
+    _selectedLatLng = value;
+  }
+
   late GoogleMapModel _googleMapModel;
-  List get textlist => _textlist;
 
   late LatLng _currentLocationLatLag;
 
+  List get textlist => _textlist;
+  List<IconData> get icondata => _icondata;
   String get currentLocationName => _currentLocationName;
   LatLng get currentLocationLatLag => _currentLocationLatLag;
 
@@ -32,7 +58,7 @@ class MapViewModel extends ChangeNotifier {
     _textlist = value;
   }
 
-  set icondata(List value) {
+  set icondata(List<IconData> value) {
     _icondata = value;
   }
 
@@ -66,6 +92,9 @@ class MapViewModel extends ChangeNotifier {
   }
 
   Future<void> getCurrentPosition() async {
+    time += 1;
+    if (_currentLocationName != "...") return;
+    print("do time : $time");
     final hasPermission = await _handleLocationPermission();
     if (!hasPermission) return;
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
@@ -78,18 +107,5 @@ class MapViewModel extends ChangeNotifier {
         _currentLocationLatLag.latitude, _currentLocationLatLag.longitude);
     currentLocationName = await response as String;
     notifyListeners();
-    // if (response is Success) {
-    //   print("cell");
-    // var res = response.response;
-    // print(res.results[0].formattedAddress);
-    // print(_currentLocationName.runtimeType);
-    // print("cell map safdsafdsafgsdgsdg");
-    // print(_googleMapModel.results[0].formattedAddress);
-    // }
-
-    // if (response is Failure) {
-    //   _currentLocationName = "Failure";
-    // }
-    // }
   }
 }

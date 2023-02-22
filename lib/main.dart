@@ -23,12 +23,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MapViewModel()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Flutter Food app',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         routes: Navigate.routes,
-        initialRoute: "/Home",
+        debugShowCheckedModeBanner: false,
+        initialRoute: "/BottomNavBar",
       ),
     );
   }

@@ -6,18 +6,25 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GoogleMapItem extends StatelessWidget {
   final LatLng latLng;
+  final bool edit;
   GoogleMapItem({
     Key? key,
     required this.latLng,
+    required this.edit,
+
   }) : super(key: key);
   final Completer<GoogleMapController> _controller = Completer();
 
   @override
   Widget build(BuildContext context) {
-    // Text text = Text(text_h);
-    GoogleMap googleMap = GoogleMap(
+    late GoogleMap googleMap;
+    googleMap = GoogleMap(
       mapType: MapType.normal,
-      myLocationEnabled: true,
+      rotateGesturesEnabled: false,
+      scrollGesturesEnabled: false,
+      zoomControlsEnabled: false,
+      zoomGesturesEnabled: false,
+      mapToolbarEnabled: false,
       onMapCreated: (GoogleMapController controller) {
         _controller.complete(controller);
       },
@@ -29,16 +36,6 @@ class GoogleMapItem extends StatelessWidget {
         )
       },
     );
-    // ListTile listTile = ListTile(
-    //     leading: Icon(iconData),
-    //     title: text,
-    //     trailing: IconButton(
-    //       icon: Icon(Icons.edit),
-    //       onPressed: () {
-    //         Navigator.pushNamed(context, "/routeName");
-    //       },
-    //     ));
-
     return googleMap;
   }
 }

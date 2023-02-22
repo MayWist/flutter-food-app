@@ -11,9 +11,15 @@ class _BasketState extends State<Basket> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(title: Text("Basket")),
       body: Center(
-        child: Text("Basket"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text("Basket"),
+          ],
+        ),
       ),
     );
   }

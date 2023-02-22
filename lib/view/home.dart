@@ -19,11 +19,18 @@ class _HomeState extends State<Home> {
   }
 
   TextField find_res = TextField();
-  Image image = Image.network(
-      'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/food-menu-promotion-design-template-29de117a2c0d6dba80ccd0970fca1f5b_screen.jpg?ts=1620243830',
-      height: 250,
-      width: 250,
-      fit: BoxFit.cover);
+  Card image = Card(
+    elevation: 5,
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Image.network(
+        'https://www.hollywoodreporter.com/wp-content/uploads/2012/12/img_logo_blue.jpg',
+        width: double.infinity,
+        height: 180.0,
+        fit: BoxFit.cover,
+      ),
+    ),
+  );
   ListView listView = ListView.builder(
     shrinkWrap: true,
     scrollDirection: Axis.horizontal,
@@ -34,13 +41,23 @@ class _HomeState extends State<Home> {
         width: 150.0,
         height: 100.0,
         child: Card(
-          color: Colors.white30,
+          color: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6.0),
           ),
           elevation: 1,
           child: Column(
-              children: [Icon(item[index].icon), Text(item[index].text)]),
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Icon(item[index].icon),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Text(item[index].text),
+                )
+              ]),
         ),
       );
     },
@@ -51,33 +68,51 @@ class _HomeState extends State<Home> {
   );
   @override
   Widget build(BuildContext context) {
+    Provider.of<MapViewModel>(context).getCurrentPosition();
+
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, "/FoodDeliveryLocation");
-            },
-            icon: const Icon(Icons.map),
-          ),
-          title: Consumer(
-            builder: (BuildContext context, MapViewModel map, Widget? child) {
-              // return Text(map.currentLocationName);
-              // TextButton.icon(
-              //   icon: null,
-              //   label: null,
-              //   onPressed: () {},
-              // );
-              return InkWell(
-                child: Text(map.currentLocationName),
-                onTap: () {
-                  Navigator.pushNamed(context, "/FoodDeliveryLocation");
-                },
-              );
-            },
-          )),
+        backgroundColor: Colors.white,
+        leadingWidth: 15.0,
+        leading: const Icon(
+          Icons.place,
+          color: Colors.amber,
+        ),
+        title: Consumer(
+          builder: (BuildContext context, MapViewModel map, Widget? child) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, "/FoodDeliveryLocation");
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Current location',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: Text(
+                      map.currentLocationName,
+                      style: TextStyle(fontSize: 12, color: Colors.black),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 8),
+          padding: const EdgeInsets.fromLTRB(5, 10, 5, 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -85,19 +120,16 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.all(8.0),
                 child: Text(
                   'Find res',
-                  style: TextStyle(fontSize: 24.0),
+                  style: TextStyle(fontSize: 10.0),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.network(
-                  'https://www.hollywoodreporter.com/wp-content/uploads/2012/12/img_logo_blue.jpg',
-                  width: double.infinity,
-                  height: 200.0,
-                  fit: BoxFit.cover,
-                ),
+                  padding: const EdgeInsets.fromLTRB(20, 1, 5, 2),
+                  child: image),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 0, 8),
+                child: SizedBox(height: 100.0, child: listView),
               ),
-              SizedBox(height: 100.0, child: listView),
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text("Restaurant near me"),

@@ -1,86 +1,192 @@
 import 'package:flutter/material.dart';
+import 'package:flutterappfood/view/bottomnavbar.dart';
 
 class SignIn extends StatelessWidget {
-  const SignIn({super.key});
-
+  SignIn({super.key});
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My Page'),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Header Text',
-                  style: TextStyle(fontSize: 24.0),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.network(
-                  'https://www.hollywoodreporter.com/wp-content/uploads/2012/12/img_logo_blue.jpg',
+    return SafeArea(
+      child: Scaffold(
+          extendBody: true,
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
                   width: double.infinity,
-                  height: 200.0,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'List View',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-              ),
-              SizedBox(
-                height: 150.0,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Item $index'),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Grid View',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-              ),
-              SizedBox(
-                height: 400.0,
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  children: List.generate(
-                    6,
-                    (index) {
-                      return Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Item $index'),
+                  decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(50),
+                          bottomRight: Radius.circular(50))),
+                  child: Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Text(
+                          "Welcome",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
-                      );
-                    },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: SizedBox(
+                          width: 150,
+                          height: 100,
+                          child: Image.network(
+                            'https://www.shutterstock.com/image-vector/burger-vintage-stamp-sticker-vector-600w-644233561.jpg', // Replace with your logo image asset path
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: Column(
+                    children: [
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Sign in',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Email or phone number',
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          )),
+                          controller: _emailController,
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Password',
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          )),
+                          controller: _passwordController,
+                          obscureText: true,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            // Implement forgot password logic here
+                          },
+                          child: const Text(
+                            'Forgot Password',
+                            style: TextStyle(color: Colors.amber),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.amber)),
+                          onPressed: () {
+                            // Implement sign in logic here
+                          },
+                          child: Text('Sign In'),
+                        ),
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            // Implement sign in logic here
+                          },
+                          child: const Text(
+                            'Login with otp',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            // Implement forgot password logic here
+                          },
+                          child: const Text(
+                            'Register',
+                            style: TextStyle(color: Colors.amber),
+                          ),
+                        ),
+                      ),
+                      Row(children: [
+                        const Expanded(
+                            child: Divider(
+                          color: Colors.black,
+                        )),
+                        Padding(
+                            padding: EdgeInsets.fromLTRB(3, 0, 3, 0),
+                            child: const Text("Or")),
+                        const Expanded(child: Divider(color: Colors.black)),
+                      ]),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        height: 60,
+                        width: 60,
+                        child: Card(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.network(
+                              "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+          ),
     );
   }
 }

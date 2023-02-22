@@ -9,12 +9,15 @@ class Order extends StatefulWidget {
 
 class _OrderState extends State<Order> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Order")),
-      body: Center(
-        child: Text("Order"),
-      ),
-    );
+        appBar: AppBar(
+      title: Text("Order"),
+    ));
   }
 }

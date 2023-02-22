@@ -53,7 +53,7 @@ List<Choice> DUMMULISTSETTING = [
   Choice(icon: Icons.abc, text: "000000000000"),
   Choice(icon: Icons.abc, text: "Give a discount"),
   Choice(icon: Icons.abc, text: "lorm"),
-  Choice(icon: Icons.abc, text: "Give a discount"),
+  Choice(icon: Icons.macro_off, text: "Give a discount"),
   Choice(icon: Icons.abc, text: "Give a discount"),
   Choice(icon: Icons.abc, text: "Give a discount"),
   Choice(icon: Icons.abc, text: "Give a discount"),
@@ -61,6 +61,14 @@ List<Choice> DUMMULISTSETTING = [
 List<Choice> DUMMYLISTSERVICE = [
   Choice(icon: Icons.abc, text: "Give a discount"),
   Choice(icon: Icons.abc, text: "Give a discount"),
-  Choice(icon: Icons.abc, text: "Give a discount"),
-  Choice(icon: Icons.abc, text: "Give a discount"),
+  Choice(icon: Icons.abc, text: "XXXsadasd"),
+  Choice(icon: Icons.abc, text: "wqeqweqew1010"),
+];
+
+List<Widget> ITEMBOTTOMNAV =[
+  Icon(Icons.home, size: 30),
+  Icon(Icons.favorite, size: 30),
+  Icon(Icons.list_alt, size: 30),
+  Icon(Icons.notifications, size: 30),
+  Icon(Icons.people_alt_sharp, size: 30),
 ];
