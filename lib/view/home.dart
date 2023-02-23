@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
   );
   @override
   Widget build(BuildContext context) {
-    Provider.of<MapViewModel>(context).getCurrentPosition();
+    // Provider.of<MapViewModel>(context).getCurrentPosition();
 
     return Scaffold(
       extendBody: true,

@@ -1,9 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterappfood/utility/constants.dart';
+import 'package:flutterappfood/viewmodels/authentication.dart';
 import 'package:flutterappfood/viewmodels/bottomnav_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'auth/account.dart';
 import 'auth/sign_in.dart';
 import 'basket.dart';
 import 'home.dart';
@@ -21,16 +23,31 @@ class _BottomNavBarState extends State<BottomNavBar> {
     Basket(),
     Order(),
     NotificationPage(),
-    SignIn()
+    SignIn(),
   ];
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<BottomNavProvider>(context);
+    BottomNavProvider provider_bottomnav =
+        Provider.of<BottomNavProvider>(context);
+    AuthenticationViewModel provider_auth =
+        Provider.of<AuthenticationViewModel>(context);
 
-    return Scaffold(extendBody: true,
-      body: _children[provider.currentIndex],
-      bottomNavigationBar: Consumer<BottomNavProvider>(
-        builder: (BuildContext context, bottomnav, Widget? child) {
+    if (provider_auth.login) {
+      // _children.removeAt(4);
+      // _children.add(Account());
+      _children[4] = Account();
+    } else {
+      // _children.removeAt(4);
+      // _children.add(SignIn());
+      _children[4] = SignIn();
+    }
+    return Scaffold(
+      extendBody: true,
+      body: _children[provider_bottomnav.currentIndex],
+      bottomNavigationBar:
+          Consumer2<BottomNavProvider, AuthenticationViewModel>(
+        builder: (BuildContext context, BottomNavProvider bottomnav,
+            AuthenticationViewModel auth, Widget? child) {
           return CurvedNavigationBar(
             height: 60.0,
             items: ITEMBOTTOMNAV,

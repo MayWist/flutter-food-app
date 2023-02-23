@@ -9,19 +9,6 @@ class MyGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get the screen size
-    final screenSize = MediaQuery.of(context).size;
-    Card image = Card(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(50),
-        child: Image.network(
-          'https://www.hollywoodreporter.com/wp-content/uploads/2012/12/img_logo_blue.jpg',
-          width: double.infinity,
-          height: 180.0,
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
 
     int crossAxisCount = 2;
     if (MediaQuery.of(context).size.width >= 600) {

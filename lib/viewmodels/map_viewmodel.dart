@@ -29,6 +29,12 @@ class MapViewModel extends ChangeNotifier {
     _selectedindex = value;
   }
 
+//try to re pos pin in map
+  setNewlatlng(int index, LatLng latlng) {
+    latLanlist[index] = latlng;
+    notifyListeners();
+  }
+
   late LatLng _selectedLatLng;
 
   LatLng get selectedLatLng => _selectedLatLng;

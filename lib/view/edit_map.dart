@@ -5,8 +5,14 @@ import 'package:flutterappfood/viewmodels/map_viewmodel.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-class EditMap extends StatelessWidget {
+class EditMap extends StatefulWidget {
   EditMap({super.key});
+
+  @override
+  State<EditMap> createState() => _EditMapState();
+}
+
+class _EditMapState extends State<EditMap> {
   final Completer<GoogleMapController> _controller = Completer();
 
   @override
@@ -14,16 +20,15 @@ class EditMap extends StatelessWidget {
     MapViewModel provider = Provider.of<MapViewModel>(context);
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text("data"),
-        ),
         floatingActionButton: FloatingActionButton.extended(
             label: Text("บันทึกตำแหน่ง"),
             icon: Icon(Icons.place),
-            onPressed: () {}),
+            onPressed: () {
+              Navigator.pushNamed(context, "/FoodDeliveryLocation");
+            }),
         body: GoogleMap(
-          onTap: (LatLng latLng) {
-            provider.latLanlist[provider.selectedindex] = latLng;
+          onTap: (LatLng latLng) async {
+            provider.latLanlist[provider.selectedindex] = await latLng;
           },
           mapType: MapType.normal,
           myLocationEnabled: true,
@@ -34,10 +39,20 @@ class EditMap extends StatelessWidget {
               CameraPosition(target: provider.selectedLatLng, zoom: 15),
           markers: {
             Marker(
-              markerId: const MarkerId("1"),
-              position: provider.selectedLatLng,
-            )
+                markerId: const MarkerId("1"),
+                position: provider.latLanlist[provider.selectedindex],
+                draggable: true,
+                onDragEnd: (LatLng latLng) async {
+                  provider.latLanlist[provider.selectedindex] = await latLng;
+                })
           },
+          // markers: {
+          //   Consumer<MapViewModel>(
+          //       builder: (BuildContext context, bottomnav, Widget? child) {
+          //     return Marker(markerId: MarkerId("value"));
+          //     }
+          //     );
+          // },
         ));
   }
 }

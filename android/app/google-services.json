@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "608842914060-hapmeet1viltiu1o24i4pv5t4ac69119.apps.googleusercontent.com",
+          "client_id": "608842914060-hkqm11vl73sd4d80oq2so1eqmehv779c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.intern.baicfluttermap.flutterappfood",
+            "certificate_hash": "e5dbdb7a22ee2e3c696d9474ef9e5368604596fe"
+          }
+        },
+        {
+          "client_id": "608842914060-9p41lp21jj9kjct9meej06gpka7faqrv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "608842914060-hapmeet1viltiu1o24i4pv5t4ac69119.apps.googleusercontent.com",
+              "client_id": "608842914060-9p41lp21jj9kjct9meej06gpka7faqrv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
