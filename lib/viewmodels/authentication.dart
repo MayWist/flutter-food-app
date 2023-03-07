@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationViewModel extends ChangeNotifier {
   // FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final googleSignIn = GoogleSignIn(
     scopes: [
       'email',
@@ -19,7 +20,6 @@ class AuthenticationViewModel extends ChangeNotifier {
   }
 
   Future<bool> emailandpasswordLogin(_email, _password) async {
-    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     try {
       UserCredential userCredential = await firebaseAuth
           .signInWithEmailAndPassword(email: _email, password: _password);
@@ -32,6 +32,29 @@ class AuthenticationViewModel extends ChangeNotifier {
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
       }
+      return false;
+    }
+  }
+
+  Future<bool> googleLogin() async {
+    try {
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      if (googleUser == null) return false;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final UserCredential userCredential =
+          await firebaseAuth.signInWithCredential(credential);
+      _login = true;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      print('Failed to sign in with Google: $e');
       return false;
     }
   }
@@ -49,7 +72,7 @@ class AuthenticationViewModel extends ChangeNotifier {
       await FirebaseAuth.instance.signOut();
       await googleSignIn.disconnect();
     }
-
-    Navigator.pushNamedAndRemoveUntil(context, "/Home", (route) => false);
+    _login = false;
+    notifyListeners();
   }
 }

@@ -174,12 +174,19 @@ class SignIn extends StatelessWidget {
                     SizedBox(
                       height: 60,
                       width: 60,
-                      child: Card(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.network(
-                            "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png",
-                            fit: BoxFit.cover,
+                      child: InkWell(
+                        onTap: () async {
+                          if (await provider.googleLogin()) {
+                          } else {}
+                          ;
+                        },
+                        child: Card(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.network(
+                              "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png",
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),

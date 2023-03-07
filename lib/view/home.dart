@@ -13,12 +13,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  TextEditingController _findrescontroller = TextEditingController();
   @override
-  void initState() {
-    super.initState();
+  void dispose() {
+    _findrescontroller.dispose();
+    super.dispose();
   }
 
-  TextField find_res = TextField();
   Card image = Card(
     elevation: 5,
     child: ClipRRect(
@@ -110,17 +111,39 @@ class _HomeState extends State<Home> {
           },
         ),
       ),
+      //search bar it have background color and color for border and thick lines in flutter
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(5, 10, 5, 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'Find res',
-                  style: TextStyle(fontSize: 10.0),
+              Container(
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _findrescontroller,
+                        decoration: InputDecoration(
+                          fillColor: Colors.amber,
+                          filled: true,
+                          suffixIcon: Icon(Icons.search),
+                          suffixIconColor: Colors.white,
+                          hintText: 'Find a restaurant now',
+                          hintStyle: const TextStyle(color: Colors.white),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                            borderSide: BorderSide(
+                                color: Colors.amber.shade300, width: 10.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Padding(
