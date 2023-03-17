@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterappfood/components/gridviewitem.dart';
 import 'package:flutterappfood/model/choice_model.dart';
@@ -20,18 +21,38 @@ class _HomeState extends State<Home> {
     super.dispose();
   }
 
-  Card image = Card(
-    elevation: 5,
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: Image.network(
-        'https://www.hollywoodreporter.com/wp-content/uploads/2012/12/img_logo_blue.jpg',
-        width: double.infinity,
-        height: 180.0,
-        fit: BoxFit.cover,
-      ),
-    ),
-  );
+  Widget slider = CarouselSlider.builder(
+      itemCount: DUMMYIMGSLIDER.length,
+      itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
+        return Card(
+          elevation: 5,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              DUMMYIMGSLIDER[itemIndex],
+              width: double.infinity,
+              height: 180.0,
+              fit: BoxFit.cover,
+            ),
+          ),
+        );
+      },
+      options: CarouselOptions(
+        height: 180,
+        aspectRatio: 16 / 9,
+        viewportFraction: 0.8,
+        initialPage: 0,
+        enableInfiniteScroll: true,
+        reverse: false,
+        autoPlay: true,
+        autoPlayInterval: Duration(seconds: 2),
+        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        autoPlayCurve: Curves.fastOutSlowIn,
+        enlargeCenterPage: true,
+        enlargeFactor: 0.3,
+        scrollDirection: Axis.horizontal,
+      ));
+
   ListView listView = ListView.builder(
     shrinkWrap: true,
     scrollDirection: Axis.horizontal,
@@ -63,14 +84,14 @@ class _HomeState extends State<Home> {
       );
     },
   );
-  MyGridView gridView = MyGridView(
-    items: DUMMYLISTMENU,
-    itemHeight: 8.0,
-  );
+  @override
+  void initState() {
+    super.initState();
+    initmap();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Provider.of<MapViewModel>(context).getCurrentPosition();
-
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
@@ -111,8 +132,6 @@ class _HomeState extends State<Home> {
           },
         ),
       ),
-      //search bar it have background color and color for border and thick lines in flutter
-
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(5, 10, 5, 8),
@@ -148,7 +167,7 @@ class _HomeState extends State<Home> {
               ),
               Padding(
                   padding: const EdgeInsets.fromLTRB(20, 1, 5, 2),
-                  child: image),
+                  child: slider),
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 0, 0, 8),
                 child: SizedBox(height: 100.0, child: listView),
@@ -157,11 +176,19 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.all(8.0),
                 child: Text("Restaurant near me"),
               ),
-              SizedBox(height: 400.0, child: gridView),
+              SizedBox(
+                  height: 400.0,
+                  child: MyGridView(
+                    items: DUMMYSTORE,
+                  )),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void initmap() async {
+    await Provider.of<MapViewModel>(context).getCurrentPosition();
   }
 }

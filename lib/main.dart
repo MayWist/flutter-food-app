@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutterappfood/routes/navigate.dart';
 import 'package:flutterappfood/viewmodels/authentication.dart';
 import 'package:flutterappfood/viewmodels/bottomnav_provider.dart';
+import 'package:flutterappfood/viewmodels/food_viewmodel.dart';
 import 'package:flutterappfood/viewmodels/map_viewmodel.dart';
+import 'package:flutterappfood/viewmodels/splash_screen_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // FirebaseSingleton().initialize;
   await Firebase.initializeApp();
-  
   runApp(const MyApp());
 }
 
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => BottomNavProvider()),
         ChangeNotifierProvider(create: (_) => AuthenticationViewModel()),
         ChangeNotifierProvider(create: (_) => MapViewModel()),
+        ChangeNotifierProvider(create: (_) => SplashScreenProvider()),
+        ChangeNotifierProvider(create: (_) => FoodViewModel()),
       ],
       child: MaterialApp(
         title: 'Flutter Food app',
@@ -30,7 +34,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: Navigate.routes,
         debugShowCheckedModeBanner: false,
-        initialRoute: "/BottomNavBar",
+        initialRoute: "/SplashScreenNav",
       ),
     );
   }

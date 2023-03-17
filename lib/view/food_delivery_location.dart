@@ -9,7 +9,6 @@ class FoodDeliveryLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MapViewModel provider = Provider.of<MapViewModel>(context, listen: false);
-
     return Scaffold(
       appBar: AppBar(title: const Text("Food delivery location")),
       body: Padding(
@@ -23,7 +22,7 @@ class FoodDeliveryLocation extends StatelessWidget {
               if (index == 0) {
                 map = Column(
                   children: [
-                     ListTile(
+                    ListTile(
                       title: Text(title),
                     ),
                     Container(

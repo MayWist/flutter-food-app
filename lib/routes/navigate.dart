@@ -7,8 +7,11 @@ import 'package:flutterappfood/view/food_delivery_location.dart';
 import 'package:flutterappfood/view/home.dart';
 import 'package:flutterappfood/view/notification_page.dart';
 import 'package:flutterappfood/view/order.dart';
+import 'package:flutterappfood/view/splashscreen/splash_screen_nav.dart';
+import 'package:flutterappfood/view/store.dart';
 
 import '../view/bottomnavbar.dart';
+import '../view/food_detail.dart';
 
 class Navigate {
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -20,6 +23,9 @@ class Navigate {
     '/SignIn': (BuildContext context) => SignIn(),
     '/FoodDeliveryLocation': (BuildContext context) => FoodDeliveryLocation(),
     '/BottomNavBar': (BuildContext context) => BottomNavBar(),
-    '/EditMap': (BuildContext context) => EditMap()
+    '/EditMap': (BuildContext context) => EditMap(),
+    '/SplashScreenNav': (BuildContext context) => SplashScreenNav(),
+    '/Store': (BuildContext context) => Store(),
+    '/FoodDetail': (BuildContext context) => FoodDetail(),
   };
 }
